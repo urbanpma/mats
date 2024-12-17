@@ -154,12 +154,11 @@
     projectId: "mostwanted-6d1e3",
     storageBucket: "mostwanted-6d1e3.firebasestorage.app",
     messagingSenderId: "333619454118",
-    appId: "1:333619454118:web:833b53b1b621b54e1b5467",
-    measurementId: "G-PMVE3VD47Y"
+    appId: "1:333619454118:web:833b53b1b621b54e1b5467"
   };
 
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
 
     // Guardar materiales en Firebase
     function saveMaterialsToFirebase() {
