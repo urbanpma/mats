@@ -142,132 +142,52 @@
     </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js"></script>
+
 <script>
-    let materials = JSON.parse(localStorage.getItem('materials')) || [];
-    let products = JSON.parse(localStorage.getItem('products')) || {};
+    // Configuración de Firebase
+    const firebaseConfig = {
+    apiKey: "AIzaSyAOnqpPVPQuU4Xx3H-Y6qbYIAEqFQHrICQ",
+    authDomain: "mostwanted-6d1e3.firebaseapp.com",
+    databaseURL: "https://mostwanted-6d1e3-default-rtdb.firebaseio.com",
+    projectId: "mostwanted-6d1e3",
+    storageBucket: "mostwanted-6d1e3.firebasestorage.app",
+    messagingSenderId: "333619454118",
+    appId: "1:333619454118:web:833b53b1b621b54e1b5467",
+    measurementId: "G-PMVE3VD47Y"
+  };
 
-    // Función para agregar o sumar cantidad a un material
-    function addMaterial() {
-        const name = document.getElementById('materialName').value.trim();
-        const quantity = parseInt(document.getElementById('materialQuantity').value);
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-        if (name && quantity > 0) {
-            const existingMaterial = materials.find(material => material.name.toLowerCase() === name.toLowerCase());
+    // Guardar materiales en Firebase
+    function saveMaterialsToFirebase() {
+        firebase.database().ref('materials').set(materials);
+    }
 
-            if (existingMaterial) {
-                existingMaterial.quantity += quantity;
-            } else {
-                materials.push({ name, quantity });
-            }
+    // Guardar productos en Firebase
+    function saveProductsToFirebase() {
+        firebase.database().ref('products').set(products);
+    }
 
-            saveMaterials();
+    // Cargar datos desde Firebase
+    function loadFromFirebase() {
+        firebase.database().ref('materials').on('value', snapshot => {
+            materials = snapshot.val() || [];
             updateMaterialList();
-        } else {
-            alert("Por favor, ingresa un nombre y una cantidad válida.");
-        }
-    }
-
-    // Función para actualizar la lista de materiales en pantalla
-    function updateMaterialList() {
-        const materialList = document.getElementById('materialList');
-        materialList.innerHTML = '';
-        materials.forEach((material, index) => {
-            materialList.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                ${material.name} - ${material.quantity}
-                <button class="btn btn-sm btn-danger" onclick="removeMaterial(${index})">Eliminar</button>
-            </li>`;
-        });
-    }
-
-    // Eliminar un material
-    function removeMaterial(index) {
-        materials.splice(index, 1);
-        saveMaterials();
-        updateMaterialList();
-    }
-
-    // Guardar materiales en localStorage
-    function saveMaterials() {
-        localStorage.setItem('materials', JSON.stringify(materials));
-    }
-
-    // Función para agregar un producto con materiales requeridos
-    function addProduct() {
-        const name = document.getElementById('productName').value.trim();
-        const materialsRequired = {};
-
-        // Obtener valores de cada material
-        ['Metal Chatarra', 'Goma', 'Acero', 'Plástico', 'Cobre', 'Oro', 'Hierro', 'Lingotes de Plata', 'Vidrio'].forEach(material => {
-            const quantity = parseInt(document.getElementById(material).value) || 0;
-            if (quantity > 0) {
-                materialsRequired[material] = quantity;
-            }
         });
 
-        if (name && Object.keys(materialsRequired).length > 0) {
-            products[name] = materialsRequired;
-            saveProducts();
+        firebase.database().ref('products').on('value', snapshot => {
+            products = snapshot.val() || {};
             updateProductOptions();
-            alert("Producto agregado correctamente.");
-        } else {
-            alert("Por favor, ingresa un nombre de producto y materiales requeridos válidos.");
-        }
-    }
-
-    // Guardar productos en localStorage
-    function saveProducts() {
-        localStorage.setItem('products', JSON.stringify(products));
-    }
-
-    // Actualizar la lista de opciones de productos en el select
-    function updateProductOptions() {
-        const productSelect = document.getElementById('selectedProduct');
-        productSelect.innerHTML = '';
-        Object.keys(products).forEach(product => {
-            productSelect.innerHTML += `<option value="${product}">${product}</option>`;
         });
     }
 
-    // Cargar productos y materiales desde el almacenamiento local al iniciar
-    function loadAppData() {
-        updateMaterialList();
-        updateProductOptions();
-    }
-
-    // Calcular el bono necesario para fabricar un producto
-    function calculateBonus() {
-        const productName = document.getElementById('selectedProduct').value;
-        const materialsRequired = products[productName];
-        let totalBonos = 0;
-
-        for (let material in materialsRequired) {
-            if (materialsRequired.hasOwnProperty(material)) {
-                const requiredAmount = materialsRequired[material];
-
-                if (material === 'Metal Chatarra') totalBonos += requiredAmount / 25;
-                if (material === 'Plástico') totalBonos += requiredAmount / 15;
-                if (material === 'Acero') totalBonos += requiredAmount / 10;
-                if (material === 'Goma') totalBonos += requiredAmount / 20;
-            }
-        }
-
-        document.getElementById('bonusResult').innerText = `Bonos necesarios: ${Math.ceil(totalBonos)}`;
-    }
-
-    // Descargar lista de materiales
-    function downloadMaterials() {
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(materials));
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", "materials.json");
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
-    }
-
-    // Iniciar datos desde localStorage
-    loadAppData();
+    // Llama a esta función al cargar la página
+    loadFromFirebase();
 </script>
+
 
 
 
