@@ -78,53 +78,55 @@
 
         <!-- Sección de fabricación -->
         <div class="col-md-6">
-            <div id="productForm">
-                <h3>Agregar Producto</h3>
-                <label for="productName">Nombre del Producto:</label>
-                <input type="text" id="productName" class="form-control" placeholder="Nombre del producto">
-                <br>
-            
-                <h4>Materiales requeridos:</h4>
-                <div>
-                    <label for="Metal Chatarra">Metal Chatarra:</label>
-                    <input type="number" id="Metal Chatarra" class="form-control" placeholder="Cantidad">
+            <div class="card p-3 mb-4">
+                <div id="productForm">
+                    <h3>Agregar Producto</h3>
+                    <label for="productName">Nombre del Producto:</label>
+                    <input type="text" id="productName" class="form-control" placeholder="Nombre del producto">
+                    <br>
+                
+                    <h4>Materiales requeridos:</h4>
+                    <div>
+                        <label for="Metal Chatarra">Metal Chatarra:</label>
+                        <input type="number" id="Metal Chatarra" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Goma">Goma:</label>
+                        <input type="number" id="Goma" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Acero">Acero:</label>
+                        <input type="number" id="Acero" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Plástico">Plástico:</label>
+                        <input type="number" id="Plástico" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Cobre">Cobre:</label>
+                        <input type="number" id="Cobre" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Oro">Oro:</label>
+                        <input type="number" id="Oro" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Hierro">Hierro:</label>
+                        <input type="number" id="Hierro" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Lingotes de Plata">Lingotes de Plata:</label>
+                        <input type="number" id="Lingotes de Plata" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <div>
+                        <label for="Vidrio">Vidrio:</label>
+                        <input type="number" id="Vidrio" class="form-control" placeholder="Cantidad">
+                    </div>
+                    <br>
+                    <button onclick="addProduct()" class="btn btn-success">Agregar Producto</button>
                 </div>
-                <div>
-                    <label for="Goma">Goma:</label>
-                    <input type="number" id="Goma" class="form-control" placeholder="Cantidad">
-                </div>
-                <div>
-                    <label for="Acero">Acero:</label>
-                    <input type="number" id="Acero" class="form-control" placeholder="Cantidad">
-                </div>
-                <div>
-                    <label for="Plástico">Plástico:</label>
-                    <input type="number" id="Plástico" class="form-control" placeholder="Cantidad">
-                </div>
-                <div>
-                    <label for="Cobre">Cobre:</label>
-                    <input type="number" id="Cobre" class="form-control" placeholder="Cantidad">
-                </div>
-                <div>
-                    <label for="Oro">Oro:</label>
-                    <input type="number" id="Oro" class="form-control" placeholder="Cantidad">
-                </div>
-                <div>
-                    <label for="Hierro">Hierro:</label>
-                    <input type="number" id="Hierro" class="form-control" placeholder="Cantidad">
-                </div>
-                <div>
-                    <label for="Lingotes de Plata">Lingotes de Plata:</label>
-                    <input type="number" id="Lingotes de Plata" class="form-control" placeholder="Cantidad">
-                </div>
-                <div>
-                    <label for="Vidrio">Vidrio:</label>
-                    <input type="number" id="Vidrio" class="form-control" placeholder="Cantidad">
-                </div>
-                <br>
-                <button onclick="addProduct()" class="btn btn-success">Agregar Producto</button>
+                
             </div>
-            
             <div class="card p-3">
                 <h5 class="card-title">Calculadora de Bonos</h5>
                 <form id="calculateBonusForm">
